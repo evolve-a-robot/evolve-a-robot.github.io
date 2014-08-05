@@ -1,1 +1,343 @@
-Hello World
+<!doctype html>
+
+<script src="evo_js/three.min.js"></script>
+<script src="evo_js/stats.js"></script>
+<script src="evo_js/physijs/physi.js"></script>
+
+<script src="evo_js/evo_environment/evo_interface.js" ></script>
+<script src="evo_js/evo_environment/data_interface.js" ></script>
+<script src="evo_js/evo_environment/generational_ga.js" ></script>
+<script src="evo_js/evo_environment/simulator.js" ></script>
+<script src="evo_js/animats/car.js" ></script>
+
+<script src="evo_js/environments/spheres.js" ></script>
+<script src="evo_js/environments/square_bumps.js" ></script>
+<script src="evo_js/environments/hill_climb.js" ></script>
+<script src="evo_js/environments/flat_plain.js" ></script>
+
+<script src="evo_js/utility/math.gaussian.js" ></script>
+
+<script type="text/javascript">
+  (function() {
+        var lastTime = 0;
+        var vendors = ['webkit', 'moz'];
+        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+            window.cancelAnimationFrame =
+              window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                  timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+    }());
+
+  window.onload = function() {
+    document.getElementById("mut_slider").onchange= function() {
+      var test = parseFloat(document.getElementById("mutate-label").innerHTML).toFixed(2)
+      console.log(test);
+      document.getElementById("mutate-label").innerHTML = test;
+    }
+
+    document.getElementById("crossover_slider").onchange= function() {
+      document.getElementById("cxrate-label").innerHTML = parseFloat(document.getElementById("cxrate-label").innerHTML).toFixed(2);
+    }  
+  }
+
+  var EvoInterface = new evo_interface();
+
+</script>
+
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Evolve-A-Robot!</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+
+
+<nav id="header" class="tab-bar">
+  <section class="left-small">
+    <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+  </section>
+  <section class="right tab-bar-section">
+    <ul class="right button-group hide-for-small">
+      <!-- <li><a href="#" data-reveal-id="design-modal" class="cust-menu button small">Design</a></li> -->
+      <li><a href="#" data-reveal-id="learn-modal" class="cust-menu button small">Learn</a></li>
+      <li><a href="#" data-reveal-id="about-modal" class="cust-menu button small">About</a></li>
+    </ul>
+    <div id="small-menu" class="show-for-small">
+      <a href="#" data-dropdown="sm-menu" data-options="is_hover:true"><span>Menu</span></a>
+      <ul id="sm-menu" class="f-dropdown" data-dropdown-content>
+        <li><a href="#" data-reveal-id="design-modal">Design</a></li>
+        <li><a href="#" data-reveal-id="learn-modal">Learn</a></li>
+        <li><a href="#" data-reveal-id="about-modal">About</a></li>
+      </ul>
+    </div>
+  <h1 class="title">Evolve-A-Robot</h1>
+  </section>
+</nav>
+
+
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <aside class="left-off-canvas-menu">
+      <span class="secondary label">Settings</span>
+
+
+<dl class="accordion" data-accordion>
+  <dd class="accordion-navigation">
+    <a href="#evolution-settings">Evolution</a>
+    <div id="evolution-settings" class="content active">
+
+<div class="setting">
+  <label>Population Size</label>
+  <span id="popsize-label" class="slider-label"></span>
+  <div id="pop_slider" class="range-slider" data-slider data-options="display_selector:#popsize-label;start:10;end:50;step:5;initial:10">
+    <span class="range-slider-handle"></span>
+    <span class="range-slider-active-segment"></span>
+    <input type="hidden">
+  </div>
+</div>
+
+<div class="setting">
+  <label>Selection Method</label>
+  <div id="sel-change-radio" class="radio-group" data-radio>
+    <input type="radio" id="sel-roul" name="selmethod" value="roulette"><label for="sel-roul" class="label-33">Roulette
+    </label><input type="radio" id="sel-tour" name="selmethod" checked="checked" value="tournament"><label for="sel-tour" class="active label-33">Tournament
+    </label><input type="radio" id="sel-rand" name="selmethod" value="random"><label for="sel-rand" class="label-33">Random</label>
+  </div>
+</div>
+
+<div class="setting">
+  <label>Tournament Size</label>
+  <span id="tourn-label" class="slider-label"></span>
+  <div id="tourn_slider" class="range-slider" data-slider data-options="display_selector:#tourn-label;start:2;end:5;step:1;initial:2">
+    <span class="range-slider-handle"></span>
+    <span class="range-slider-active-segment"></span>
+    <input type="hidden">
+  </div>
+</div>
+
+<div class="setting">
+  <label>Mutation Method</label>
+  <div id="mut-change-radio" class="radio-group" data-radio>
+    <input type="radio" id="mut-rand" name="mutmethod" checked="checked" value="random"><label for="mut-rand" class="active label-50">Random
+    </label><input type="radio" id="mut-gaus" name="mutmethod"value="gaussian"><label for="mut-gaus" class="label-50">Gaussian</label>
+  </div>
+</div>
+
+<div class="setting">
+  <label>Mutation Rate</label>
+  <span id="mutate-label" class="slider-label"></span>
+  <div id="mut_slider" class="range-slider" data-slider data-options="display_selector:#mutate-label;start:0;end:1;step:0.01;initial:0.05">
+    <span class="range-slider-handle"></span>
+    <span class="range-slider-active-segment"></span>
+    <input type="hidden">
+  </div>
+</div>
+
+<div class="setting">
+  <label>Crossover Method</label>
+  <div id="cx-change-radio" class="radio-group" data-radio>
+    <input type="radio" id="cx-1pt" name="cxmethod" value="single"><label for="cx-1pt" class="label-33" value="single">One-Point
+    </label><input type="radio" id="cx-2pt" name="cxmethod" checked="checked" value="double"><label for="cx-2pt" class="active label-33">Two-Point
+    </label><input type="radio" id="cx-uni" name="cxmethod" checked="checked" value="random"><label for="cx-uni" class="label-33">Uniform
+  </div>
+</div>
+
+<div class="setting">
+  <label>Crossover Rate</label>
+  <span id="cxrate-label" class="slider-label"></span>
+  <div id="crossover_slider" class="range-slider" data-slider data-options="display_selector:#cxrate-label;start:0;end:1;step:0.01;initial:0.00000000000000000001">
+    <span class="range-slider-handle"></span>
+    <span class="range-slider-active-segment"></span>
+    <input type="hidden">
+  </div>
+</div>
+
+    </div>
+  </dd>
+
+  <dd class="accordion-navigation">
+    <a href="#env-settings">Environment</a>
+    <div id="env-settings" class="content">
+
+<div class="setting">
+  <label>Terrain Type</label>
+  <select id="terrain_select">
+    <option value="flat">Flat</option>
+    <option value="stairs">Stairs</option>
+    <option value="logs">Logs</option>
+    <option value="spheres">Spheres</option>
+  </select>
+</div>
+
+    </div>
+  </dd>
+
+  <dd class="accordion-navigation">
+    <a href="#robot-settings">Robot</a>
+    <div id="robot-settings" class="content">
+    </div>
+  </dd>
+</dl>
+
+
+    </aside>
+
+
+    <div id="all-content">
+      <section id="vis-content" class="main-section">
+        <h4 id="content-title">Genetic Algorithm</h4>
+        <div id="launch-div">
+            <!-- When the button is clicked, a message appears. When it is clicked again the message goes away. -->
+            <a href="#" class="button" id="launch_button" onclick="launchButtonClick()">Launch Simulation</a>
+        </div>
+        <div id="container"><div id="individual-information">
+          Generation:
+          <span id="individual-generation"></span>
+          Individual:
+          <span id="individual-individual"></span>
+        </div></div>
+      </section>
+      <section id="footer">
+
+<div id="footer-logos">
+<div>
+  <img id="coe-logo" src="img/Engineering_MSU-Wordmark-WHITE_transparent.gif">
+</div>
+</div>
+
+        
+      </section>
+    </div>
+    
+    <a class="exit-off-canvas"></a>
+  </div>
+</div>
+
+<!-- <div id="design-modal" class="reveal-modal" data-reveal>
+  <h2>Hand design a car to inject into the simulation.</h2>
+  <a class="close-reveal-modal">&#215;</a>
+</div> -->
+
+<div id="learn-modal" class="reveal-modal" data-reveal>
+  <h1>How to use <span style="font-variant:small-caps;">Evolve-A-Robot</span></h1>
+    <p>The information in this modal box explains how to set up and run a simulation. It is divided into two sections, &ldquo;Settings Menu&rdquo; and &ldquo;Window Controls&rdquo;.</p>
+  <h2>Settings Menu</h2>
+    <p>The sections below correspond to the menu selections available on the left-hand side of the window. The default settings have been chosen to make an &ldquo;interesting&rdquo; simulation, but feel free to experiment with the settings to see what effect they have on the evolved robot.</p>
+  <h3>Evolution</h3>
+    <ul>
+      <li>The first slider sets the population size (default 20). Population size can affect the rate at which the simulation converges and the genetic diversity.</li>
+      <li>Mutation settings affect how quickly mutations are introduced into the population (Rate) and what method is used to generate mutation (Random or Gaussian).</li>
+      <li>Crossover refers to the algorithm that is used for generating offspring. It can be changed by manipulating the Method (Tournament, Roulette, Random) and the Rate. 
+        <ul>
+          <li>If Tournament is selected there is also the option available to change the number of individuals involved in the tournament. </li>
+          <li>The crossover Rate can be changed from 0 to 100 percent.</li>
+        </ul>
+      </li>
+      <li>Elitism (making sure the best individual remains a member of the population in the next generation) can be turned on and off using the switch.</li>
+    </ul>
+  <h3>Robot</h3>
+    <p>Watch for additional features here in the future!</p>
+  <h3>Environment</h3>
+    <ul>
+      <li>
+        <p>Choose from four different environments:</p>
+          <ul>
+          <li>Flat</li>
+          <li>Stairs</li>
+          <li>Logs</li>
+          <li>Spheres</li>
+          </ul>
+        <p>Each environment has its own set of parameters to control. Choose and experiment!</p>
+      </li>
+    </ul>
+  <h3>Visualization</h3>
+    <ul>
+      <li>The first option is for choosing how many individuals in a population to render at the same time. Must be an integer between 1 and the population size.</li>
+      <li>The Graphing switch toggles the fitness graph.</li>
+    </ul>
+  <h2>Window Controls</h2>
+    <p>After the parameters have been chosen in the Settings Menu, click the &ldquo;Play/Pause&rdquo; button in the main window to start the simulation. The same button will pause the simulation at any time. Click the &ldquo;Reset&rdquo; button to restart the simulation with a new population. </p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="about-modal" class="reveal-modal" data-reveal>
+  <h1>All about&hellip;</h1>
+  <h3><span style="font-variant:small-caps;">Evolve-A-Robot</span></h3>
+    <p><span style="font-variant:small-caps;">Evolve-A-Robot</span> was developed as part of a summer Research Experience for Teachers (RET, see below) and is intended to be an instructional aid for teaching <a href="http://www.cse.dmu.ac.uk/~rij/gafaq/top.htm" target="_blank" title="Hitchhikers Guide to EC">Evolutionary Computation (EC)</a>. It can be used equally well by students new to the concepts of EC as well as students that have already had an introduction to Genetic Algorithms (GA). It requires only that the viewing browser has <strong>WebGL</strong> enabled (<strong>Chrome</strong> recommended; enabled by default).</p>
+  <h3>The RET Program</h3>
+    <p>This website is based upon work supported by the National Science Foundation under Grant No. CNS 1300794 administered by the College of Engineering at Michigan State University. Click <a href="http://www.egr.msu.edu/future-engineer/display/research-experiences-teachers" target="_blank" title="MSU Future Engineers">here</a> for more information.</p>
+  <h3>The Authors</h3>
+  <h4>Jared M. Moore</h4>
+    <p>A short bio of Jared would normally go here but there is no such thing as a short bio for Jared. Jared&rsquo;s bio occupies multiple disk farms spread over untold servers. Recent estimates put it at one-fourth of the world&rsquo;s cloud space. Hope you have fiber.</p>
+  <h4>Anthony J. Clark</h4>
+    <p>Tony is one of the most patient individuals known anywhere, especially when he has to teach a mechanical engineer how to code.</p>
+  <h4>Charles M. Payson</h4>
+    <p>Charlie Payson is a mechanical engineer whose sole purpose in life is to try people&rsquo;s patience by attempting to write code.</p>
+  <h3>Inspiration</h3>
+    <p>It would be remiss of us not to mention <a href="http://boxcar2d.com/index.html" target="_blank" title="2D Genetic Algorithm">boxcar2d.com</a>. A good site that can be used as an introduction to or in parallel with this one.</p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+    
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation/foundation.js"></script>
+    <script src="js/foundation/foundation.offcanvas.js"></script>
+    <script src="js/foundation/foundation.accordion.js"></script>
+    <script src="js/foundation/foundation.slider.js"></script>
+    <script src="js/foundation/foundation.reveal.js"></script>
+    <script src="js/foundation/foundation.dropdown.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/interaction_handler.js"></script>
+
+    <script>
+      $(document).foundation({
+        accordion: {
+          // specify the class used for active (or open) accordion panels
+          active_class: 'active',
+          // allow multiple accordion panels to be active at the same time
+          multi_expand: false,
+          // allow accordion panels to be closed by clicking on their headers
+          // setting to false only closes accordion panels when another is opened
+          toggleable: true,
+
+        },
+        offcanvas: {
+          close_on_click: false
+        }
+      });
+
+      // $(".accordion dd").on("click", "a:eq(0)", function (event) {
+      //   var dd_parent = $(this).parent();
+
+      //   if(dd_parent.hasClass('active')) {
+      //     $(".accordion dd div.content:visible").slideToggle("normal");
+      //   } else {
+      //     $(".accordion dd div.content:visible").slideToggle("normal");
+      //     $(this).parent().find(".content").slideToggle("normal");
+      //   }
+      // });
+    </script>
+
+  </body>
+</html>

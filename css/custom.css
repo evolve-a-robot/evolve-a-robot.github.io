@@ -1,0 +1,222 @@
+
+body {
+	overflow: hidden;
+}
+.title {
+	font-variant: small-caps;
+}
+
+#small-menu {
+	float: right;
+	margin-right: 1rem;
+}
+#small-menu>a {
+	color: #FFF;
+	padding-right: 3rem;
+}
+#small-menu>a>span:hover:after {
+	cursor: pointer;
+}
+#small-menu>a>span:after {
+	content: "\00a0\00a0\00a0\00a0\00a0";
+	position: absolute;
+	display: block;
+	height: 0;
+	top: 50%;
+	margin-top: -24px;
+	right: 15px;
+	box-shadow: 0 16px 0 1px #fff, 0 23px 0 1px #fff, 0 30px 0 1px #fff;
+	width: 16px;
+}
+.tab-bar {
+	/*background-color: #FFF;*/
+	/*background: #FFF;*/
+	/*color: #18453B;*/
+	/*border-bottom: 1px solid #18453B;*/
+	/*box-shadow: 0 0px 6px 1px #18453B;*/
+}
+.tab-bar h1 {
+	/*color: #18453B;*/
+}
+.tab-bar .menu-icon {
+	/*color: #18453B;*/
+}
+.tab-bar .button-group > li .button {
+	/*color: #18453B;*/
+}
+.tab-bar-section {
+	padding-right: 0;
+}
+.tab-bar .button-group > li > button, .button-group > li .button {
+	/*-webkit-box-shadow: 1px 0px 2px 0px #18453B;*/
+	/*-moz-box-shadow:    1px 0px 2px 0px #18453B;*/
+	/*box-shadow:         1px 0px 2px 0px #18453B;*/
+}
+.left-small {
+	/*border-right: 1px solid #18453B;*/
+	/*-webkit-box-shadow: 1px 0px 2px 0px #18453B;*/
+	/*-moz-box-shadow:    1px 0px 2px 0px #18453B;*/
+	/*box-shadow:         1px 0px 2px 0px #18453B;*/
+}
+.tab-bar .menu-icon span::after {
+	/*box-shadow: 0 0 0 1px #18453B, 0 7px 0 1px #18453B, 0 14px 0 1px #18453B;*/
+}
+.cust-menu {
+	/*background-color: #FFF;*/
+	background-color: #333;
+}
+.cust-menu:hover {
+	/*background-color: #EEE;*/
+	background-color: #222;
+}
+
+
+.accordion-navigation a {
+	text-align: center;
+}
+.accordion .content, .left-off-canvas-menu {
+	background-color: #FFF;
+}
+
+.setting {
+	margin-bottom: 1rem;
+}
+.setting>label {
+	margin-bottom: 0.5rem;
+}
+.setting>.range-slider {
+	margin: 0 0 0 1rem;
+	width: 75%;
+}
+.setting>.slider-label {
+	float: right;
+	line-height: 0.95rem;
+}
+
+.setting>select {
+
+}
+
+
+div.radio-group {
+	display: block;
+	width: 93%;
+	margin-left: auto;
+}
+[data-radio]>input[type=radio] {
+	position: absolute;
+	z-index: -1;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	line-height: normal;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	border-radius: .2rem;
+	-webkit-appearance: radio;
+}
+[data-radio]>label {
+	background-color: #748f89;
+	padding: 0.3rem 0;
+	color: #FFF;
+	border-left: 1px solid #CCC;
+	font-size: 0.48rem;
+	text-align: center;
+	border-radius: .3rem;
+}
+[data-radio]>label.active {
+	background-color: #466a62;
+	-webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+	box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+[data-radio]>label:nth-of-type(1) {
+	border-left: 0;
+}
+[data-radio]>input[type=radio] + label {
+	margin: .1rem;
+}
+[data-radio]>label.label-33 {
+	width: 30%
+}
+[data-radio]>label.label-50 {
+	width: 47%
+}
+
+#container {
+	width: 60%;
+	display: none;
+	margin: 0 auto;
+}
+
+#individual-information {
+	display: none;
+	color: white;
+	float:left;
+	margin: 0 auto;
+}
+
+.reveal-modal {
+	overflow-y: scroll;
+	height: 70vh;
+	min-height: 200px;
+}
+
+#launch_button {
+	margin: 0 auto;
+	border-radius: .3rem;
+	background-color: #748f89;
+  	border-color: #466a62;
+}
+
+#launch_button:hover {
+	background-color: #f00;
+}
+
+#launch-div {
+	text-align: center;
+}
+
+#content-title {
+	text-align: center;
+	padding-top: 1rem;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.main-section {
+	background-color: #18453b;
+}
+
+#footer {
+	height: 3.75rem;
+	background-color: #333;
+}
+
+#coe-logo {
+	width: 300px;
+}
+
+#msu-logo {
+	/*margin-left: auto;*/
+	/*margin-right: auto;*/
+	/*display: inline-block;*/
+	/*display: block;*/
+	/*padding-top: 2rem;*/
+	width: 120px;
+}
+
+#footer-logos {
+	margin-left: 0px;
+	margin-right: auto;
+	width: 600px;
+	/*display: block;*/
+	/*padding-top: 2rem;*/
+}
+
+canvas {
+	border: 4px solid white;
+	border-right: 5px solid white;
+}
