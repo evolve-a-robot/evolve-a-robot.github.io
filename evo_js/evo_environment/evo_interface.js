@@ -61,6 +61,7 @@ function evo_interface() {
 
 	    // Initialize the plotting div.
 	    D3_Plotter.generationalScatterplot();
+	    D3_Plotter.populationScatterplot();
 	}
 
 	// Adjust the population size.

@@ -140,6 +140,9 @@ function generational_ga() {
 		// Update the individual counter.
 	    DataInterface.iterationUpdate(cur_iteration);
 
+	    // Update the population scatterplot.
+	    DataInterface.updatePopulationScatterplot(cur_iteration, fitnesses.length >= 1 ? fitnesses[fitnesses.length-1] : false);
+
 		// if (best_fitness === "") {
 		// 	add_best_individual();
 		// } else if (cur_fitness > best_fitness && !arraysIdentical(best_genome,genome)) {

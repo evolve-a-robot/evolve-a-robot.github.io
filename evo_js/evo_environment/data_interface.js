@@ -20,6 +20,10 @@ var DataInterface = DataInterface || new function() {
 			]);
 	}
 
+	this.updatePopulationScatterplot = function(individual, fitness) {
+		D3_Plotter.updatePopulationScatterplot(fitness ? [[individual,fitness,0]] : false);
+	}
+
 	this.iterationUpdate = function(iteration) {
 		document.getElementById("individual-individual").innerHTML = iteration;
 	}

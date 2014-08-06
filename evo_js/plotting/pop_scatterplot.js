@@ -4,16 +4,18 @@
 // Input data is assumed to have the following format:
 // [[gen,max_fitness,0],[gen,avg_fitness,1]]
 
-var D3_Plotter = D3_Plotter || new function() {
-    var fitness_data = [];
+var Generic_Scatterplot = function() {
+  var fitness_data = [];
     var colors = [d3.rgb(255,0,0),d3.rgb(0,255,0)]
     var xScale, yScale, yAxis, xAxis, svg;
 
     // Create the scatterplot object which tracks population fitness.
-    this.generationalScatterplot = function() {
+    this.scatterplot = function(xAxisLabel, yAxisLabel, legend, scatterplot_div) {
         var w = 500;
         var h = 300;
         var padding = 30;
+
+        console.log(scatterplot_div);
 
         //Create scale functions
         xScale = d3.scale.linear()
@@ -37,7 +39,7 @@ var D3_Plotter = D3_Plotter || new function() {
                           .ticks(5); 
 
         //Create SVG element
-        svg = d3.select("div.scatterplot")
+        svg = d3.select(scatterplot_div)
                     .append("svg")
                     .attr("width", w)
                     .attr("height", h);
@@ -55,7 +57,7 @@ var D3_Plotter = D3_Plotter || new function() {
            })
            .attr("r", 2)
            .attr("fill", function(d) {
-           		return colors[d[2]];
+              return colors[d[2]];
            });
 
         //Create X axis
@@ -68,7 +70,7 @@ var D3_Plotter = D3_Plotter || new function() {
                 .attr("x", w)
                 .attr("y", 0)
                 .style("text-anchor", "end")
-                .text("Generation");
+                .text(xAxisLabel);
 
         //Create Y axis
         svg.append("g")
@@ -81,38 +83,47 @@ var D3_Plotter = D3_Plotter || new function() {
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Fitness");
+                .text(yAxisLabel);
 
-        // draw legend
-        var legend = svg.selectAll(".legend")
-        	.data([['max',colors[0]],['avg',colors[1]]])
-        	.enter().append("g")
-        	.attr("class", "legend")
-        	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+        if (legend) {
+          // draw legend
+          var legend = svg.selectAll(".legend")
+            .data([['max',colors[0]],['avg',colors[1]]])
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-		// draw legend colored rectangles
-		legend.append("rect")
-		.attr("x", w - 18)
-		.attr("width", 18)
-		.attr("height", 18)
-		.style("fill", function(d) { return d[1]; });
+          // draw legend colored rectangles
+          legend.append("rect")
+          .attr("x", w - 18)
+          .attr("width", 18)
+          .attr("height", 18)
+          .style("fill", function(d) { return d[1]; });
 
-		// draw legend text
-		legend.append("text")
-		.attr("x", w - 24)
-		.attr("y", 9)
-		.attr("dy", ".35em")
-		.style("text-anchor", "end")
-		.text(function(d) { return d[0];})
+          // draw legend text
+          legend.append("text")
+          .attr("x", w - 24)
+          .attr("y", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d[0];})
+        }
     }
 
     // Update function to add new data to the scatterplot.
     //
     // Input data is assumed to have the following format:
-	// [[gen,max_fitness,0],[gen,avg_fitness,1]
-    this.updateGenerationalScatterplot = function(new_data) {
-        fitness_data.push(new_data[0]);
-        fitness_data.push(new_data[1]);
+  // [[gen,max_fitness,0],[gen,avg_fitness,1]
+    this.updateScatterplot = function(new_data) {
+        // If new_data is empty, reset the plot.
+        if(!new_data) {
+          fitness_data = [];
+        } else {
+          for (var i = 0; i < new_data.length; ++i) {
+            fitness_data.push(new_data[i]);
+          }
+        }
+        console.log(fitness_data);
 
         //Update scale domains
         xScale.domain([0, d3.max(fitness_data, function(d) { return Math.ceil((d[0]+1)/10)*10; })]);
@@ -130,7 +141,7 @@ var D3_Plotter = D3_Plotter || new function() {
                 return yScale(d[1]);
            })
            .attr("fill", function(d) {
-           		return colors[d[2]];
+              return colors[d[2]];
            });
 
         //Enter new circles
@@ -146,7 +157,7 @@ var D3_Plotter = D3_Plotter || new function() {
             })
             .attr("r", 2)
            .attr("fill", function(d) {
-           		return colors[d[2]];
+              return colors[d[2]];
            });
 
         // Remove old
@@ -172,5 +183,36 @@ var D3_Plotter = D3_Plotter || new function() {
             .call(xAxis);
         svg.selectAll('.y.axis')
             .call(yAxis);            
+    }
+}
+
+var D3_Plotter = D3_Plotter || new function() {
+    var gen_scatterplot = new Generic_Scatterplot();
+    var pop_scatterplot = new Generic_Scatterplot();
+
+    // Create the scatterplot object which tracks generational fitness.
+    this.generationalScatterplot = function() {
+        gen_scatterplot.scatterplot("Generation","Fitness",true,"#gen-scatterplot-div");
+    }
+
+    // Update function to add new data to the generational scatterplot.
+    //
+    // Input data is assumed to have the following format:
+	  // [[gen,max_fitness,0],[gen,avg_fitness,1]
+    this.updateGenerationalScatterplot = function(new_data) {
+        gen_scatterplot.updateScatterplot(new_data);
+    }
+
+    // Create the scatterplot that tracks population fitness during a generation.
+    this.populationScatterplot = function() {
+        pop_scatterplot.scatterplot("Population","Fitness",false,"#pop-scatterplot-div");
+    }
+
+    // Update function to add new data to the generational scatterplot.
+    //
+    // Input data is assumed to have the following format:
+    // [[gen,max_fitness,0],[gen,avg_fitness,1]
+    this.updatePopulationScatterplot = function(new_data) {
+        pop_scatterplot.updateScatterplot(new_data);
     }
 };

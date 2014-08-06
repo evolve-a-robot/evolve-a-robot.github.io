@@ -145,25 +145,33 @@ div.radio-group {
 }
 
 #container {
-	width: 60%;
+	width: 75%;
 	display: none;
 	margin: 0 auto;
+	background-color: white;
 }
 
 #individual-information {
 	display: none;
-	color: white;
+	/*color: white;*/
 	float:left;
 	margin: 0 auto;
+	width: 100%;
 }
 
-#scatterplot-div {
+.scatterplot {
 	display: none;
 	background-color: white;
-	/*width: 520px;*/
-	/*height: 320px;*/
-	padding: 10px;
+}
+
+#gen-scatterplot-div {
 	float: right;
+	padding: 10px 10px 10px 10px;
+}
+
+#pop-scatterplot-div {
+	float: left;
+	padding: 10px 10px 10px 10px;
 }
 
 .reveal-modal {

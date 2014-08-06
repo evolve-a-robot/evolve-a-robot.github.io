@@ -8,7 +8,8 @@ function launchButtonClick(e) {
 	document.getElementById("individual-information").style.display = 'block';
 
 	// Unhide the Population Scatterplot.
-	document.getElementById("scatterplot-div").style.display = 'block';
+	document.getElementById("gen-scatterplot-div").style.display = 'block';
+	document.getElementById("pop-scatterplot-div").style.display = 'block';
 
 	var params = {
 		ga_params: {
