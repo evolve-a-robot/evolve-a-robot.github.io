@@ -159,6 +159,7 @@ div.radio-group {
 
 #scatterplot-div {
 	display: none;
+	background-color: white;
 }
 
 .reveal-modal {
