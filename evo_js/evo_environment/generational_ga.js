@@ -126,6 +126,9 @@ function generational_ga() {
 				new_population.push(new_ind);
 			}
 
+			// Update the plots with the fitnesses.
+			DataInterface.updateScatterplot(parseInt(document.getElementById("individual-generation").innerHTML), fitnesses);
+
 			population = new_population;
 			fitnesses = [];
 			cur_iteration = 0;

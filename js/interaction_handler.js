@@ -7,6 +7,9 @@ function launchButtonClick(e) {
 	// Unhide the Individual Information Window.
 	document.getElementById("individual-information").style.display = 'block';
 
+	// Unhide the Population Scatterplot.
+	document.getElementById("scatterplot-div").style.display = 'block';
+
 	var params = {
 		ga_params: {
 			pop_size: $('#pop_slider').attr('data-slider'),

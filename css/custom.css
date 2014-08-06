@@ -157,6 +157,10 @@ div.radio-group {
 	margin: 0 auto;
 }
 
+#scatterplot-div {
+	display: none;
+}
+
 .reveal-modal {
 	overflow-y: scroll;
 	height: 70vh;

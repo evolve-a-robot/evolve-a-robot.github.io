@@ -58,6 +58,9 @@ function evo_interface() {
 
 	    document.getElementById("individual-generation").innerHTML = 0;
 	    document.getElementById("individual-individual").innerHTML = 0;
+
+	    // Initialize the plotting div.
+	    D3_Plotter.scatterplot();
 	}
 
 	// Adjust the population size.

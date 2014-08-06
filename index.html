@@ -4,6 +4,10 @@
 <script src="evo_js/stats.js"></script>
 <script src="evo_js/physijs/physi.js"></script>
 
+<script src="js/d3.min.js"></script>
+
+<script src="evo_js/plotting/pop_scatterplot.js" ></script>
+
 <script src="evo_js/evo_environment/evo_interface.js" ></script>
 <script src="evo_js/evo_environment/data_interface.js" ></script>
 <script src="evo_js/evo_environment/generational_ga.js" ></script>
@@ -205,16 +209,21 @@
     <div id="all-content">
       <section id="vis-content" class="main-section">
         <h4 id="content-title">Genetic Algorithm</h4>
-        <div id="launch-div">
-            <!-- When the button is clicked, a message appears. When it is clicked again the message goes away. -->
-            <a href="#" class="button" id="launch_button" onclick="launchButtonClick()">Launch Simulation</a>
-        </div>
-        <div id="container"><div id="individual-information">
-          Generation:
-          <span id="individual-generation"></span>
-          Individual:
-          <span id="individual-individual"></span>
-        </div></div>
+          <div id="launch-div">
+              <!-- When the button is clicked, a message appears. When it is clicked again the message goes away. -->
+              <a href="#" class="button" id="launch_button" onclick="launchButtonClick()">Launch Simulation</a>
+          </div>
+          <div id="container">
+            <div id="individual-information">
+            Generation:
+            <span id="individual-generation"></span>
+            Individual:
+            <span id="individual-individual"></span>
+            </div>
+            <div class='scatterplot' id='scatterplot-div'>
+              <!-- /the chart goes here -->
+            </div>
+          </div>
       </section>
       <section id="footer">
 
