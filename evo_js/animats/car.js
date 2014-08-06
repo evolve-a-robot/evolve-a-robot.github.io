@@ -213,9 +213,9 @@ function car() {
 		// Move the wheels.
 		for(var i = 0; i < wheel_motors.length; ++i) {
 			if (i % 2 == 0) {
-				wheel_motors[i].configureAngularMotor( 2, 1, 0, -20, 10000 );
+				wheel_motors[i].configureAngularMotor( 2, 1, 0, -10, 10000 );
 			} else {
-				wheel_motors[i].configureAngularMotor( 2, 1, 0, 20, 10000 );
+				wheel_motors[i].configureAngularMotor( 2, 1, 0, 10, 10000 );
 			}
 			wheel_motors[i].enableAngularMotor( 2 );
 		}

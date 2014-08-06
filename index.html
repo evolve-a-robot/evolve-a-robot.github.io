@@ -21,6 +21,21 @@
 
 <script src="evo_js/utility/math.gaussian.js" ></script>
 
+<!-- CSS rules for the pop_scatterplot.js codebase. -->
+<style type="text/css">
+  .axis path,
+  .axis line {
+      fill: none;
+      stroke: black;
+      shape-rendering: crispEdges;
+  }
+
+  .axis text {
+      font-family: sans-serif;
+      font-size: 11px;
+  }
+</style>
+
 <script type="text/javascript">
   (function() {
         var lastTime = 0;
@@ -220,8 +235,10 @@
             Individual:
             <span id="individual-individual"></span>
             </div>
-            <div class='scatterplot' id='scatterplot-div'>
-              <!-- /the chart goes here -->
+            <div class='show-for-large-up'>
+              <div class='scatterplot' id='scatterplot-div'>
+                <!-- /the chart goes here -->
+              </div>
             </div>
           </div>
       </section>

@@ -32,7 +32,7 @@ function simulator() {
 				.99, // high friction
 				.4 // low restitution
 			);
-	var ground_geometry = new THREE.CubeGeometry(1000, 0.2, 500);
+	var ground_geometry = new THREE.CubeGeometry(4000, 0.2, 4000);
 
 	var radius   = 1,
     	segments = 64;
@@ -51,7 +51,7 @@ function simulator() {
 	this.initScene = function( div_to_place , robot) {
 
 		var container_width = document.getElementById(div_to_place).offsetWidth;
-		var container_height = 0.9 * document.getElementById(div_to_place).offsetHeight;
+		var container_height = 0.5 * document.getElementById(div_to_place).offsetHeight;
 
 		Robot = robot;
 
@@ -145,7 +145,7 @@ function simulator() {
 			scene.add( light );
 
 			// Grid on ground.
-			var grid = new THREE.GridHelper(500, 10);
+			var grid = new THREE.GridHelper(4000, 10);
 			grid.position = new THREE.Vector3(0,0.51,0);
 			scene.add(grid);
 

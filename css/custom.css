@@ -160,6 +160,10 @@ div.radio-group {
 #scatterplot-div {
 	display: none;
 	background-color: white;
+	/*width: 520px;*/
+	/*height: 320px;*/
+	padding: 10px;
+	float: right;
 }
 
 .reveal-modal {
