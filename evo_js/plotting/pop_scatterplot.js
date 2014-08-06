@@ -10,7 +10,7 @@ var D3_Plotter = D3_Plotter || new function() {
     var xScale, yScale, yAxis, xAxis, svg;
 
     // Create the scatterplot object which tracks population fitness.
-    this.scatterplot = function() {
+    this.generationalScatterplot = function() {
         var w = 500;
         var h = 300;
         var padding = 30;
@@ -110,7 +110,7 @@ var D3_Plotter = D3_Plotter || new function() {
     //
     // Input data is assumed to have the following format:
 	// [[gen,max_fitness,0],[gen,avg_fitness,1]
-    this.updateScatterplot = function(new_data) {
+    this.updateGenerationalScatterplot = function(new_data) {
         fitness_data.push(new_data[0]);
         fitness_data.push(new_data[1]);
 

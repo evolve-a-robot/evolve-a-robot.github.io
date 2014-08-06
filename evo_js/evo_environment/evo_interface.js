@@ -56,11 +56,11 @@ function evo_interface() {
 	    document.getElementById("cx-change-radio").onchange=cxChange;
 	    document.getElementById("crossover_slider").onchange=crossoverRateChange;
 
-	    document.getElementById("individual-generation").innerHTML = 0;
+	    document.getElementById("individual-generation").innerHTML = 1;
 	    document.getElementById("individual-individual").innerHTML = 0;
 
 	    // Initialize the plotting div.
-	    D3_Plotter.scatterplot();
+	    D3_Plotter.generationalScatterplot();
 	}
 
 	// Adjust the population size.

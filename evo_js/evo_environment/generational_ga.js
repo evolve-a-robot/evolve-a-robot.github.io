@@ -127,7 +127,7 @@ function generational_ga() {
 			}
 
 			// Update the plots with the fitnesses.
-			DataInterface.updateScatterplot(parseInt(document.getElementById("individual-generation").innerHTML), fitnesses);
+			DataInterface.updateGenerationalScatterplot(parseInt(document.getElementById("individual-generation").innerHTML), fitnesses);
 
 			population = new_population;
 			fitnesses = [];
@@ -138,10 +138,7 @@ function generational_ga() {
 		}
 
 		// Update the individual counter.
-	    document.getElementById("individual-individual").innerHTML = cur_iteration;
-
-		// DataInterface.iterationUpdate(iteration);
-		// DataInterface.updateScatterplot(iteration, cur_fitness);
+	    DataInterface.iterationUpdate(cur_iteration);
 
 		// if (best_fitness === "") {
 		// 	add_best_individual();
