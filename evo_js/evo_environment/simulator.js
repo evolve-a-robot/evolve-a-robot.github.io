@@ -50,7 +50,7 @@ function simulator() {
 
 	this.initScene = function( div_to_place , robot) {
 
-		var container_width = document.getElementById(div_to_place).offsetWidth;
+		var container_width = document.getElementById(div_to_place).offsetWidth - 8;
 		var container_height = 0.5 * document.getElementById(div_to_place).offsetHeight;
 
 		Robot = robot;
