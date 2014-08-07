@@ -15,9 +15,9 @@ var D3_Plotter = D3_Plotter || new function() {
     this.scatterplot = function(xAxisLabel, yAxisLabel, legend, scatterplot_div, point_colors) {
       var popchart = $("#pop-scatterplot-div"),
           vis_height = $("#vis-content").height(),
-          p = 10,
-          w = popchart.parent().width() - 2*p,
-          h = vis_height/2 - 4*p;
+          p = 30,
+          w = popchart.parent().width() - p,
+          h = vis_height/2 - 40;
 
       colors = point_colors;
 
