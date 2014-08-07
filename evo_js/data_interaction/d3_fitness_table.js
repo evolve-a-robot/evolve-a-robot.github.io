@@ -13,16 +13,22 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
 
         // Generate the headers.
         var headers = [];
-        headers.push({label:"Generation",fixed_width:true,col_span:1});
-        headers.push({label:"Fitness",fixed_width:true,col_span:1});
+        // headers.push({label:"Generation",fixed_width:true,col_span:1});
+        // headers.push({label:"Fitness",fixed_width:true,col_span:1});
+        // headers.push({label:"Genome",fixed_width:false,col_span:genome_description.length});
+        headers.push({label:"Gen",fixed_width:true,col_span:1});
+        headers.push({label:"Fit",fixed_width:true,col_span:1});
         headers.push({label:"Genome",fixed_width:false,col_span:genome_description.length});
 
         // Calculate the width of the Gene cells based on available width and number of genes.
-        var gene_width = (document.getElementById('container').offsetWidth - 200)
+        var table_width = document.getElementById('fitness_table').offsetWidth,
+            header_width = 60,
+            genome_width = table_width - 2 * header_width;
+            // = (document.getElementById('fitness_table').offsetWidth - 200);
         // console.log(document.getElementById('container').offsetWidth, gene_width, Math.floor(gene_width).toString()+"px");
 
         table = d3.select("#fitness_table").append("table")
-                                               .attr("id", "fitness_log_table")
+                                               .attr("id", "fitness_log_table");
                                                //.style("visibility","hidden"),
         thead = table.append("thead"),
         tbody = table.append("tbody");
@@ -36,7 +42,7 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
             .data(headers)
             .enter()
             .append("th")
-                .style("width", function(d) { return d.fixed_width ? "100px" : Math.floor(gene_width).toString()+"px";})
+                .style("width", function(d) { return d.fixed_width ? header_width + "px" : Math.floor(genome_width) + "px";})
                 .attr("colspan", function(d) {return d.col_span;})
                 .text(function(d) { return d.label; });
 
@@ -105,10 +111,10 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
             .append("td")
                 .attr("class","best_ind")
                 .style("border", "1px black solid")
-                .style("padding", "4px")
+                .style("padding", "1px")
                 .style("background-color", function(d){return d.color;})
                 .attr("title", function(d){return d.visible ? "" : d.gene_descr+": "+d.val;})
-                .text(function(d){return d.visible ? d.val : "";}); 
+                .text(function(d){return d.visible ? d.val.toFixed(2) : "";}); 
 
         table.style("visibility","visible");
     }
