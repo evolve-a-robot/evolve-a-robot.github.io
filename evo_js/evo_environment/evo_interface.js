@@ -62,6 +62,7 @@ function evo_interface() {
 	    // Initialize the plotting div.
 	    D3_Plotter.generationalScatterplot();
 	    D3_Plotter.populationScatterplot();
+	    D3_FitnessTable.table(this.RobotGenome.genomeDescr());
 	}
 
 	// Adjust the population size.
