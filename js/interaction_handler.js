@@ -2,10 +2,9 @@ function launchButtonClick(e) {
 
 	// Hide the launch button.
 	document.getElementById("launch-div").style.display = 'none';
+	document.getElementById("content-title").style.display = 'none';
 	document.getElementById("container").style.display = 'block';
-
-	// Unhide the Individual Information Window.
-	document.getElementById("individual-information").style.display = 'block';
+	document.getElementById("center-column").style.display = 'block';
 
 	// Unhide the Population Scatterplot.
 	document.getElementById("gen-scatterplot-div").style.display = 'block';

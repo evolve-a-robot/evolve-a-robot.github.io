@@ -2,13 +2,33 @@
 var wind_height = $(window).height(),
     head_height = $("#header").height(),
     foot_height = $("#footer").height(),
-    vis_height = wind_height - head_height - foot_height - 10;
+    title_height = $("#content-title").height(),
+    vis_height = wind_height - head_height - foot_height
+
+    canvas_container = $("#container");
 
 // Need to clean this up...
 $("#vis-content").height(vis_height);
-// $("#launch-div").height(vis_height - $("#content-title").height());
-// $("#launch-div").css("line-height", Math.floor((vis_height - $("#content-title").height())/1.5) + "px");
-$("#container").height(vis_height - $("#content-title").height());
+canvas_container.height(vis_height/2);
+
+
+var popchart = $("#pop-scatterplot-div"),
+    genchart = $("#gen-scatterplot-div"),
+    popsvg, gensvg, canvas;
+
+$(window).on("resize", function() {
+  popsvg = typeof popsvg !== "undefined" ? popsvg : $(popchart).find("svg");
+  gensvg = typeof gensvg !== "undefined" ? gensvg : $(genchart).find("svg");
+  canvas = typeof canvas !== "undefined" ? canvas : $(canvas_container).find("canvas");
+
+  if (popsvg) {
+    popsvg.attr("width", popchart.parent().width());
+  }
+  if (canvas) {
+    Simulator.resize();
+  }
+
+})
 
 ;(function ($, window, document, undefined) {
   'use strict';

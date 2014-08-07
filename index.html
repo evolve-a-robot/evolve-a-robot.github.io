@@ -222,42 +222,53 @@
 
 
     <div id="all-content">
+      
       <section id="vis-content" class="main-section">
         <h4 id="content-title">Genetic Algorithm</h4>
-          <div id="launch-div">
-              <!-- When the button is clicked, a message appears. When it is clicked again the message goes away. -->
-              <p>
-                Evolution and environmental settings can be changed via the left-side off-canvas menu (button in the upper-left). These settings can be changed before launching the simulation, or while the simulation is running.
-              </p>
-              <div>
-                <a href="#" class="button" id="launch_button" onclick="launchButtonClick()">Launch Simulation</a>
-              </div>
+          
+        <div class="small-11 medium-8 large-5 small-centered columns" id="launch-div">
+            <p>
+              Evolution and environmental settings can be changed via the left-side off-canvas menu (button in the upper-left). These settings can be changed before launching the simulation, or while the simulation is running. (note: plots will only show in large windows).
+            </p>
+            <div>
+              <a href="#" class="button" id="launch_button" onclick="launchButtonClick()">Launch Simulation</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+          
+          <div class="large-4 columns show-for-large-up">
+            <div class='scatterplot' id='pop-scatterplot-div'></div>
+            <div class='scatterplot' id='gen-scatterplot-div'></div>
           </div>
-          <div id="container">
-            <div id="individual-information">
+
+<div class="small-10 large-4 small-centered columns" id="center-column">
+  <!-- <div class="small-10 large-4 small-centered columns" id="container"> -->
+          <div id="container"></div>
+          <div id="individual-information">
             Generation:
             <span id="individual-generation"></span>
             Individual:
             <span id="individual-individual"></span>
-            </div>
-            <div class='show-for-large-up'>
-              <div class='scatterplot' id='pop-scatterplot-div'>
-                <!-- /the chart goes here -->
-              </div>
-              <div class='scatterplot' id='gen-scatterplot-div'>
-                <!-- /the chart goes here -->
-              </div>
-            </div>
           </div>
+          <div style="height:200px;background-color:white;">mini-map</div>
+</div>
+
+          
+
+          <div class="large-4 columns show-for-large-up" style="background-color:white;">genome-history</div>
+
+        </div>
+
       </section>
       <section id="footer">
 
-<div id="footer-logos">
-<div>
-  <img id="coe-logo" src="img/Engineering_MSU-Wordmark-WHITE_transparent.gif">
-</div>
-</div>
-
+        <div id="footer-logos">
+        <div>
+          <img id="coe-logo" src="img/Engineering_MSU-Wordmark-WHITE_transparent.gif">
+        </div>
+        </div>
         
       </section>
     </div>
