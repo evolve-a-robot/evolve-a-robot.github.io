@@ -105,6 +105,13 @@ function generational_ga() {
 
 		// Generational Logic
 		if (cur_iteration >= this.param_pop_size) {
+			// Select the best individual from the generation.
+			var max_fitness = Math.max.apply(Math, fitnesses);
+			var max_fitness_index = fitnesses.indexOf(max_fitness);
+			
+			best_fitness = best_fitness > max_fitness ? best_fitness : max_fitness;
+			best_genomes.push(population[max_fitness_index].getGenome());
+
 			var new_population = [];
 
 			// Create the new population.
@@ -128,6 +135,9 @@ function generational_ga() {
 
 			// Update the plots with the fitnesses.
 			DataInterface.updateGenerationalScatterplot(parseInt(document.getElementById("individual-generation").innerHTML), fitnesses);
+
+			// Send the best individual to the table.
+			DataInterface.updateFitnessTable(parseInt(document.getElementById("individual-generation").innerHTML),max_fitness,best_genomes[best_genomes.length-1]);
 
 			population = new_population;
 			fitnesses = [];

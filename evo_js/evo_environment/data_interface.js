@@ -27,4 +27,14 @@ var DataInterface = DataInterface || new function() {
 	this.iterationUpdate = function(iteration) {
 		document.getElementById("individual-individual").innerHTML = iteration;
 	}
+
+	this.updateFitnessTable = function(generation,fitness,genome) {
+		var data_packet = [{val:generation,visible:true}, {val:fitness,visible:true}];
+
+		for(var i = 0; i < genome.length;++i) {
+			data_packet.push({val:genome[i],visible:false});
+		}
+
+		D3_FitnessTable.updateTable(data_packet);
+	}
 }

@@ -15,6 +15,7 @@ var eucl_distance = function(p1,p2) {
 function car_genome() {
 	var num_segs = 5;
 	var genome;
+	// var genomeDescription = 0;
 
 	// Initialize a genome for this robot, handled by HillClimber
 	this.initGenome = function() {
@@ -30,8 +31,8 @@ function car_genome() {
 				gen.push(0); // Chassis Segment Expressed (0:No, 1:Yes)
 			}
 			gen.push((1.+(3. * Math.random()).toFixed(4))/2.); // Chassis Length
-			gen.push((0.2 + 5. * Math.random()).toFixed(4)); // Chassis Height
-			gen.push((0.2 + 10. * Math.random()).toFixed(4)); // Chassis Width
+			gen.push((0.4 + 5. * Math.random()).toFixed(4)); // Chassis Height
+			gen.push((0.4 + 10. * Math.random()).toFixed(4)); // Chassis Width
 			if (Math.random() > 0.5) {
 				gen.push(1); // Wheels (0:No, 1:Yes)
 			} else {
@@ -41,30 +42,23 @@ function car_genome() {
 			gen.push((0.2 + 1. * Math.random()).toFixed(4)); // Wheel Width
 
 		}
-
-		// // Randomize the Joint Axis Between Segments
-		// for (var i = 0; i < num_segs-1; ++i) {
-		// 	var rand = Math.random();
-		// 	if (rand < 0.33) {
-		// 		gen.push([1,0,0]);
-		// 	} else if (rand < 0.66) {
-		// 		gen.push([0,1,0]);
-		// 	} else {
-		// 		gen.push([0,0,1]);
-		// 	}
-		// }
-
-		// // Randomize the Range of Motion for the Pivot Between Chassis Segments
-		// for (var i = 0; i < num_segs-1; ++i) {
-		// 	gen.push((90. * Math.random()).toFixed(4));
-		// }
-
-		// // Randomize the speed.
-		// for (var i = 0; i < num_segs-1; ++i) {
-		// 	gen.push((-1.0 + 2.0*Math.random()).toFixed(4));
-		// }
-
 		genome = gen;
+	}
+
+	var genomeDescriptor = function() {
+		var genomeDescription = [];
+
+		for (var i = 0; i < num_segs; ++i) {
+			genomeDescription.push("Chassis Segment "+i.toString()+" Expressed");
+			genomeDescription.push("Chassis Segment "+i.toString()+" Length");
+			genomeDescription.push("Chassis Segment "+i.toString()+" Height");
+			genomeDescription.push("Chassis Segment "+i.toString()+" Width");
+			genomeDescription.push("Wheels "+i.toString()+" Expressed");
+			genomeDescription.push("Wheels "+i.toString()+" Diameter");
+			genomeDescription.push("Wheels "+i.toString()+" Width");
+		}
+
+		return genomeDescription;
 	}
 
 	this.genomeLength = function() {
@@ -163,6 +157,22 @@ function car_genome() {
 	this.setGenome = function(gen) {
 		genome = gen.slice();
 	}
+}
+
+car_genome.genomeDescr = function() {
+	var genomeDescription = []
+
+	for (var i = 0; i < 5; ++i) {
+		genomeDescription.push("Chassis Segment "+i.toString()+" Expressed");
+		genomeDescription.push("Chassis Segment "+i.toString()+" Length");
+		genomeDescription.push("Chassis Segment "+i.toString()+" Height");
+		genomeDescription.push("Chassis Segment "+i.toString()+" Width");
+		genomeDescription.push("Wheels "+i.toString()+" Expressed");
+		genomeDescription.push("Wheels "+i.toString()+" Diameter");
+		genomeDescription.push("Wheels "+i.toString()+" Width");
+	}
+
+	return genomeDescription;
 }
 
 function car() {

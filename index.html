@@ -6,7 +6,8 @@
 
 <script src="js/d3.min.js"></script>
 
-<script src="evo_js/plotting/pop_scatterplot.js" ></script>
+<script src="evo_js/data_interaction/d3_fitness_table.js" ></script>
+<script src="evo_js/data_interaction/d3_pop_scatterplot.js" ></script>
 
 <script src="evo_js/evo_environment/evo_interface.js" ></script>
 <script src="evo_js/evo_environment/data_interface.js" ></script>
@@ -21,7 +22,7 @@
 
 <script src="evo_js/utility/math.gaussian.js" ></script>
 
-<!-- CSS rules for the pop_scatterplot.js codebase. -->
+<!-- CSS rules for the d3_pop_scatterplot.js and d3_fitness_table codebase. -->
 <style type="text/css">
   .axis path,
   .axis line {
@@ -33,6 +34,14 @@
   .axis text {
       font-family: sans-serif;
       font-size: 11px;
+  }
+
+  #fitness_table tbody tr:hover {
+      background: yellow;
+  }
+
+  #fitness_table thead tr:hover {
+      background: inherit;
   }
 </style>
 
@@ -244,6 +253,7 @@
           </div>
 
           <div class="large-4 columns" id="center-column">
+            
             <div id="container"></div>
             <div id="individual-information">
               Generation:
@@ -254,7 +264,9 @@
             <div style="height:50px;background-color:white;">mini-map</div>
           </div>          
 
-          <div class="large-4 columns show-for-large-up" style="background-color:white;">genome-history</div>
+          <div class="large-4 columns show-for-large-up">
+            <div id="fitness_table"></div>
+          </div>
 
         </div>
 
