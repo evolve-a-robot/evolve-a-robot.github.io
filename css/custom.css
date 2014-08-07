@@ -192,7 +192,12 @@ div.radio-group {
 }
 
 #launch-div {
+	margin: 0 auto;
+	padding: 0 0.2rem 0.5rem;
+	background-color: rgba(255, 255, 255, 0.8);
 	text-align: center;
+	width: 40%;
+	border-radius: 8px;
 }
 
 #content-title {

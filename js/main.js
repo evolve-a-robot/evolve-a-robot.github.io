@@ -6,8 +6,8 @@ var wind_height = $(window).height(),
 
 // Need to clean this up...
 $("#vis-content").height(vis_height);
-$("#launch-div").height(vis_height - $("#content-title").height());
-$("#launch-div").css("line-height", Math.floor((vis_height - $("#content-title").height())/1.5) + "px");
+// $("#launch-div").height(vis_height - $("#content-title").height());
+// $("#launch-div").css("line-height", Math.floor((vis_height - $("#content-title").height())/1.5) + "px");
 $("#container").height(vis_height - $("#content-title").height());
 
 ;(function ($, window, document, undefined) {
