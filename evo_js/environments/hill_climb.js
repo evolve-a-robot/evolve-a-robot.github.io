@@ -31,6 +31,9 @@ function hill_climb_environment() {
 	
 	//THREE.js Prism Primitive.
 	var prism_primitives = []
+	var prism_boxes = [];
+	var prism_scales = [];
+	var first_init = true;
 
 	// Keep track of the joints and bodies in the simulation.
 	var constraints = [];
@@ -44,30 +47,44 @@ function hill_climb_environment() {
 
 	this.createTerrain = function(validate) {
 
+		if(first_init) {
+			for (var i = 0; i < rows; ++i) {
+				prism_scales.push([run_scale * Math.random(),rise_scale * Math.random(),1.0]);
+			}
+			first_init = false;
+		} 
+
+		// Add the bodies to the simulator.
 		for ( var i = 0; i < rows; ++i ) {
+			console.log(prism_scales[i]);
 			prism_primitives.push(new THREE.CubeGeometry( 1, 1, 1 ));
 
-			var prism = new Physijs.BoxMesh(
+			prism_boxes.push(new Physijs.BoxMesh(
 				prism_primitives[prism_primitives.length-1],
 				prism_material,
 				0
-			);
+			));
 
-			prism._physijs.collision_type = 1;
-			prism._physijs.collision_masks = 4;
+			prism_boxes[i]._physijs.collision_type = 1;
+			prism_boxes[i]._physijs.collision_masks = 4;
 
-			prism.receiveShadow = true;
+			prism_boxes[i].receiveShadow = true;
 
-			var prism_scale = [run_scale * Math.random(),rise_scale * Math.random(),1.0];
-			prism.scale.set( prism_scale[0], prism_scale[1], 320.0 );
-			prism.position.set( -start_offset-cur_pos[0]-(0.5*prism_scale[0]), cur_pos[1]+(0.5*prism_scale[1]), 0 );
-			Simulator.scene().add( prism );
-			bodies.push( prism );
+			prism_boxes[i].scale.set( prism_scales[i][0], prism_scales[i][1], 320.0 );
+			prism_boxes[i].position.set( -start_offset-cur_pos[0]-(0.5*prism_scales[i][0]), cur_pos[1]+(0.5*prism_scales[i][1]), 0 );
+
+			// Add the bodies to the simulation.
+			Simulator.scene().add( prism_boxes[i] );
+			bodies.push( prism_boxes[i] );
 
 			// Update the positions.
-			cur_pos[0] += prism_scale[0];
-			cur_pos[1] += prism_scale[1];
-		}
+			cur_pos[0] += prism_scales[i][0];
+			cur_pos[1] += prism_scales[i][1];
+		} 
+
+		cur_pos[0] = 0;
+		cur_pos[1] = 0;
+		cur_pos[2] = 0;
 	}
 
 	this.removeTerrain = function() {
@@ -92,5 +109,7 @@ function hill_climb_environment() {
 
 		constraints = [];
 		bodies = [];
+		prism_primitives = []
+		prism_boxes = [];
 	}
 }

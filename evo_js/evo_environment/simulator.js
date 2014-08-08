@@ -163,6 +163,7 @@ function simulator() {
 			// Initialize the first genome for the robot.
 			Robot.setGenome(EvoInterface.GA.getGenome());
 		}
+
 		if (full_init) {
 			// Ground
 			ground = new Physijs.BoxMesh(
@@ -201,6 +202,9 @@ function simulator() {
 	var resetWorker = function() {
 		// Remove the ground as we reset it.
 		scene.remove(ground);
+
+		// Remove the terrain.
+		EvoInterface.Environment.removeTerrain();
 
 		scene.replaceWorker();
 	};
@@ -253,11 +257,6 @@ function simulator() {
 	// Reset the state of the simulation.
 	var resetBodies = function() {
 
-		// // Reset the position of the breadcrumb trail.
-		// for ( var i = 0; i < breadcrumb_balls.length; ++i ) {
-		// 	breadcrumb_balls[i].position.set( 0,0,0 );
-		// }
-
 		// Remove the robot.
 		Robot.removeRobot();
 
@@ -268,7 +267,7 @@ function simulator() {
 		floor_mesh.scale.x = scale_factor;
 		floor_mesh.scale.y = scale_factor;
 
-		if (reset_counter == 1000) {
+		if (reset_counter >= 1000) {
 			clearObjects();
 			resetWorker();
 			reset_counter = 0;
