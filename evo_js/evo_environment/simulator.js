@@ -48,16 +48,21 @@ function simulator() {
     	return scene;
     }
 
+    var canvas,
+    	canvas_container;
+
 	this.initScene = function( div_to_place , robot) {
 
-		var container_width = document.getElementById(div_to_place).offsetWidth;
-		var container_height = 0.5 * document.getElementById(div_to_place).offsetHeight;
+		canvas_container = $(document.getElementById(div_to_place));
+
+		var container_width = canvas_container.width(),
+			container_height = canvas_container.parent().height();
 
 		Robot = robot;
 
 		projector = new THREE.Projector;
 		
-		var canvas = document.createElement('canvas');
+		canvas = document.createElement('canvas');
 		canvas.id     = "Evolution_Canvas";
 		canvas.width  = container_width;
 		canvas.height = container_height;
@@ -69,6 +74,7 @@ function simulator() {
 		document.getElementById( div_to_place ).insertBefore( renderer.domElement , document.getElementById( div_to_place ).childNodes[0]);
 		
 		initScene(true);
+		this.resize();
 	};
 
 	var initScene = function(full_init) {
@@ -282,6 +288,20 @@ function simulator() {
 		// console.log(renderer.domElement);
 		window.requestAnimationFrame( render );
 		renderer.render( scene, camera );
+	};
+
+	this.resize = function () {
+		var width = canvas_container.width(),
+			height = canvas_container.height();
+
+		// Resize the canvas to fill its container
+		canvas.width = width;
+		canvas.height = height;
+
+		// Update the THREE.js objects
+		camera.aspect = width/height;
+		camera.updateProjectionMatrix();
+		renderer.setSize(width, height);
 	};
 }
 

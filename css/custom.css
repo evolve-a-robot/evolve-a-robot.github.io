@@ -144,34 +144,22 @@ div.radio-group {
 	width: 47%
 }
 
-#container {
-	width: 75%;
+#container, #center-column {
 	display: none;
-	margin: 0 auto;
-	background-color: white;
-}
-
-#individual-information {
-	display: none;
-	/*color: white;*/
-	float:left;
-	margin: 0 auto;
-	width: 100%;
 }
 
 .scatterplot {
+	margin-top: 5px;
 	display: none;
-	background-color: white;
+	background-color: #EEE;
+	width: 100%;
+	padding: 1rem;
 }
 
 #gen-scatterplot-div {
-	float: right;
-	padding: 10px 10px 10px 10px;
 }
 
 #pop-scatterplot-div {
-	float: left;
-	padding: 10px 10px 10px 10px;
 }
 
 .reveal-modal {
@@ -192,7 +180,15 @@ div.radio-group {
 }
 
 #launch-div {
+	margin: 3rem auto 0;
+	padding: 0 0.2rem 0.5rem;
+	background-color: rgba(255, 255, 255, 0.8);
 	text-align: center;
+	/*width: 40%;*/
+	border-radius: 8px;
+}
+#launch-div p {
+	font-size: 0.9rem;
 }
 
 #content-title {
@@ -236,4 +232,11 @@ div.radio-group {
 canvas {
 	border: 4px solid white;
 	border-right: 5px solid white;
+}
+
+
+#individual-information {
+	margin: 0.2rem 0;
+	color: #FFF;
+	text-align: center;
 }

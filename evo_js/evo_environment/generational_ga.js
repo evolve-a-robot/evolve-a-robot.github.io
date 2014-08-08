@@ -36,7 +36,7 @@ function generational_ga() {
 	// Initialize the generational ga.
 	this.init = function(ga_params, robot, robot_genome) {
 
-		console.log(ga_params);
+		// console.log(ga_params);
 
 		// Configure the GA parameters.
 		this.param_pop_size = ga_params.pop_size ? ga_params.pop_size : 4;

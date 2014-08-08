@@ -13,22 +13,22 @@ var D3_Plotter = D3_Plotter || new function() {
 
     // Create the scatterplot object which tracks population fitness.
     this.scatterplot = function(xAxisLabel, yAxisLabel, legend, scatterplot_div, point_colors) {
-      var w = 500;
-      var h = 300;
-      var padding = 30;
+      var popchart = $("#pop-scatterplot-div"),
+          vis_height = $("#vis-content").height(),
+          p = 30,
+          w = popchart.parent().width() - p,
+          h = vis_height/2 - 40;
 
       colors = point_colors;
-
-      console.log(scatterplot_div);
 
       //Create scale functions
       xScale = d3.scale.linear()
       .domain([0, d3.max(fitness_data, function(d) { return d[0]; })])
-      .range([padding, w - padding * 2]);
+      .range([p, w - p * 2]);
 
       yScale = d3.scale.linear()
       .domain([0, d3.max(fitness_data, function(d) { return d[1]; })])
-      .range([h - padding, padding]);
+      .range([h - p, p]);
 
       //Define X axis
       xAxis = d3.svg.axis()
@@ -67,7 +67,7 @@ var D3_Plotter = D3_Plotter || new function() {
       //Create X axis
       svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + (h - padding) + ")")
+      .attr("transform", "translate(0," + (h - p) + ")")
       .call(xAxis)
       .append("text")
       .attr("class", "label")
@@ -79,7 +79,7 @@ var D3_Plotter = D3_Plotter || new function() {
       //Create Y axis
       svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(" + padding + ",0)")
+      .attr("transform", "translate(" + p + ",0)")
       .call(yAxis)
       .append("text")
       .attr("class", "label")
