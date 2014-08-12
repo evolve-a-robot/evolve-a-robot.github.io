@@ -68,9 +68,9 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
         if (prev_row) {
             for (var i = 2; i < row_info.length; ++i) {
                 if (row_info[i].val < prev_row[i]) {
-                    data_coloring.push("red");
+                    data_coloring.push("#999");
                 } else if (row_info[i].val > prev_row[i]) {
-                    data_coloring.push("green");
+                    data_coloring.push("#333");
                 } else {
                     data_coloring.push("inherit");
                 }

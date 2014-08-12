@@ -148,18 +148,21 @@ div.radio-group {
 	display: none;
 }
 
+#center-column {
+	padding-top: 1rem;
+}
+
 .scatterplot {
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	display: none;
 	background-color: #EEE;
 	width: 100%;
-	padding: 1rem;
+	padding: 15px;
 }
 
-#gen-scatterplot-div {
-}
-
-#pop-scatterplot-div {
+#genome-row {
+	padding: 15px;
+	overflow-y: auto;
 }
 
 .reveal-modal {
