@@ -8,7 +8,7 @@ function simulator() {
 	var Robot;
 
 	var ground_material, projector, renderer, render_stats, 
-		scene, ground, light, camera, box, steps, MAX_STEPS = 10, 
+		scene, ground, light, camera, box, steps, MAX_STEPS = 1000, 
 		scale_factor = 1, reset_counter = 0;
 
 	// Origin Ball Material
