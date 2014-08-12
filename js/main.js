@@ -3,13 +3,20 @@ var wind_height = $(window).height(),
     head_height = $("#header").height(),
     foot_height = $("#footer").height(),
     title_height = $("#content-title").height(),
-    vis_height = wind_height - head_height - foot_height
+    vis_height = wind_height - head_height - foot_height,
 
-    canvas_container = $("#container");
+    vis_div = $("#vis-content"),
+    content_area = $("#content-area"),
+    canvas_container = $("#container"),
+    scatter_row = $("#scatter-row"),
+    genome_row = $("#genome-row");
 
-// Need to clean this up...
-$("#vis-content").height(vis_height);
-canvas_container.height(vis_height/2);
+// Set the height of each row in the visualization div
+vis_div.height(vis_height);
+content_area.height(vis_height);
+canvas_container.height(vis_height * 0.36);
+scatter_row.height(vis_height * 0.26);
+genome_row.height(vis_height * 0.26);
 
 
 var popchart = $("#pop-scatterplot-div"),

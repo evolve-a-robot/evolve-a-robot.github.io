@@ -14,10 +14,9 @@ var D3_Plotter = D3_Plotter || new function() {
     // Create the scatterplot object which tracks population fitness.
     this.scatterplot = function(xAxisLabel, yAxisLabel, legend, scatterplot_div, point_colors) {
       var popchart = $("#pop-scatterplot-div"),
-          vis_height = $("#vis-content").height(),
           p = 30,
           w = popchart.parent().width() - p,
-          h = vis_height/2 - 40;
+          h = $("#scatter-row").height() - p;
 
       colors = point_colors;
 

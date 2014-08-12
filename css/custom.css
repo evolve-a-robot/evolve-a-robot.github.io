@@ -148,18 +148,33 @@ div.radio-group {
 	display: none;
 }
 
+#center-column {
+	padding-top: 1rem;
+}
+
 .scatterplot {
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	display: none;
 	background-color: #EEE;
 	width: 100%;
-	padding: 1rem;
+	padding: 15px;
+	border: 3px solid #777;
 }
 
-#gen-scatterplot-div {
+#genome-row {
+	margin: 15px 0 0 0;
+	overflow-y: auto;
+	border: 3px solid #777;
+	background-color: #EEE;
 }
 
-#pop-scatterplot-div {
+#content-area {
+	/*background-color: #eee;*/
+	padding-top: 1rem;
+	/*margin-left: auto;*/
+	/*margin-right: auto;*/
+	/*width: 80%;*/
+	display: none;
 }
 
 .reveal-modal {
@@ -230,13 +245,13 @@ div.radio-group {
 }
 
 canvas {
-	border: 4px solid white;
-	border-right: 5px solid white;
+	border: 4px solid #777;
+	border-right: 5px solid #777;
 }
 
 
 #individual-information {
 	margin: 0.2rem 0;
-	color: #FFF;
+	color: #777;
 	text-align: center;
 }

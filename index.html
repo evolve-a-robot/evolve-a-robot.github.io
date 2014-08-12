@@ -245,15 +245,9 @@
         </div>
 
 
-        <div class="row">
-          
-          <div class="large-4 columns show-for-large-up">
-            <div class='scatterplot' id='pop-scatterplot-div'></div>
-            <div class='scatterplot' id='gen-scatterplot-div'></div>
-          </div>
-
-          <div class="large-4 columns" id="center-column">
-            
+<div id="content-area">
+        <div class="row" id="canvas-row">
+          <div class="small-10 medium-11 large-12 small-centered columns">
             <div id="container"></div>
             <div id="individual-information">
               Generation:
@@ -261,16 +255,27 @@
               Individual:
               <span id="individual-individual"></span>
             </div>
-            <!-- <div style="height:50px;background-color:white;text-align:center;padding-top:1rem;">
-              mini-map
-            </div> -->
-          </div>          
-
-          <div class="large-4 columns show-for-large-up">
-            <div id="fitness_table"></div>
           </div>
-
         </div>
+
+        <div class="row show-for-medium-up" id="data-rows">
+          <div class="medium-11 large-12 small-centered columns">
+            <div class="row" id="scatter-row">
+              <div class="small-6 columns">
+                <div class='scatterplot' id='pop-scatterplot-div'></div>
+              </div>
+              <div class="small-6 columns">
+                <div class='scatterplot' id='gen-scatterplot-div'></div>
+              </div>
+            </div>
+            <div class="row" id="genome-row">              
+              <div id="fitness_table"></div>
+            </div>
+          </div>
+        </div>
+</div>
+
+
 
       </section>
       <section id="footer">
