@@ -4,7 +4,7 @@ function launchButtonClick(e) {
 	document.getElementById("launch-div").style.display = 'none';
 	document.getElementById("content-title").style.display = 'none';
 	document.getElementById("container").style.display = 'block';
-	document.getElementById("center-column").style.display = 'block';
+	document.getElementById("content-area").style.display = 'block';
 
 	// Unhide the Population Scatterplot.
 	document.getElementById("gen-scatterplot-div").style.display = 'block';

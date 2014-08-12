@@ -6,15 +6,17 @@ var wind_height = $(window).height(),
     vis_height = wind_height - head_height - foot_height,
 
     vis_div = $("#vis-content"),
+    content_area = $("#content-area"),
     canvas_container = $("#container"),
     scatter_row = $("#scatter-row"),
     genome_row = $("#genome-row");
 
 // Set the height of each row in the visualization div
 vis_div.height(vis_height);
-canvas_container.height(vis_height * 0.35);
-scatter_row.height(vis_height * 0.25);
-genome_row.height(vis_height * 0.25);
+content_area.height(vis_height);
+canvas_container.height(vis_height * 0.36);
+scatter_row.height(vis_height * 0.26);
+genome_row.height(vis_height * 0.26);
 
 
 var popchart = $("#pop-scatterplot-div"),
