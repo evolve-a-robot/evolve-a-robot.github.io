@@ -194,7 +194,7 @@ var D3_Plotter = D3_Plotter || new function() {
 
   // Create the scatterplot object which tracks generational fitness.
   this.generationalScatterplot = function() {
-      gen_scatterplot.scatterplot("Generation","Fitness",true,"#gen-scatterplot-div", [d3.rgb(255,0,0),d3.rgb(0,255,0)]);
+      gen_scatterplot.scatterplot("Generation","Fitness",true,"#gen-scatterplot-div", [d3.rgb(255,0,0),d3.rgb(0,155,0)]);
   }
 
   // Update function to add new data to the generational scatterplot.
