@@ -6,9 +6,10 @@ function launchButtonClick(e) {
 	document.getElementById("container").style.display = 'block';
 	document.getElementById("content-area").style.display = 'block';
 
-	// Unhide the Population Scatterplot.
+	// Unhide the plots.
+	document.getElementById("pop-barchart-div").style.display = 'block';
 	document.getElementById("gen-scatterplot-div").style.display = 'block';
-	document.getElementById("pop-scatterplot-div").style.display = 'block';
+	// document.getElementById("pop-scatterplot-div").style.display = 'block';
 
 	var params = {
 		ga_params: {
@@ -29,38 +30,31 @@ function launchButtonClick(e) {
 }
 
 function popsizeChange() {
-	console.log("Pop Size Change");
 	EvoInterface.changePopulationSize(parseFloat(document.getElementById("popsize-label").innerHTML));
 }
 
 function tournChange() {
-	console.log("Tourn Change");
 	EvoInterface.changeTournamentSize(parseFloat(document.getElementById("tourn-label").innerHTML));
 }
 
 function mutationRateChange() {
-	console.log("Mut Rate Change");
 	document.getElementById("mutate-label").innerHTML = parseFloat(document.getElementById("mutate-label").innerHTML).toFixed(2);
 	EvoInterface.changeMutationPerc(parseFloat(document.getElementById("mutate-label").innerHTML));
 }
 
 function crossoverRateChange() {
-	console.log("CX Rate Change");
 	document.getElementById("cxrate-label").innerHTML = parseFloat(document.getElementById("cxrate-label").innerHTML).toFixed(2);
 	EvoInterface.changeCrossoverPerc(parseFloat(document.getElementById("cxrate-label").innerHTML));
 }
 
 function selChange() {
-	console.log("Selection Change");
 	EvoInterface.changeSelectionMethod($('input:radio[name="selmethod"]:checked').val());
 }
 
 function mutChange() {
-	console.log("Mutation Change");
 	EvoInterface.changeMutationMethod($('input[name="mutmethod"]:checked').val());	
 }
 
 function cxChange() {
-	console.log("Crossover Change");
 	EvoInterface.changeCrossoverMethod($('input[name="cxmethod"]:checked').val());
 }
