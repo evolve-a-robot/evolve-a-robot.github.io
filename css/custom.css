@@ -150,6 +150,7 @@ div.radio-group {
 
 #container, #center-column {
 	display: none;
+	border: 3px solid #777;
 }
 
 #center-column {
@@ -247,12 +248,6 @@ div.radio-group {
 	/*display: block;*/
 	/*padding-top: 2rem;*/
 }
-
-canvas {
-	border: 4px solid #777;
-	border-right: 5px solid #777;
-}
-
 
 #individual-information {
 	margin: 0.2rem 0;
