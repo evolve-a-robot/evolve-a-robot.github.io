@@ -94,6 +94,9 @@ function simulator() {
 					// Set the camera to follow the center body of the robot.
 					var pos = Robot.position();
 
+					// Update the population scatterplot.
+				    EvoInterface.GA.updateCurrentFitness(pos.x,pos.y,pos.z);
+
 					camera.position.set(60+pos.x,50+pos.y,60+pos.z);
 					light.position.set( 20+pos.x, 40+pos.y, 15+pos.z );
 					light.target.position.set( scene.position.x+pos.x,scene.position.y+pos.y,scene.position.z+pos.z );

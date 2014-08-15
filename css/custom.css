@@ -157,7 +157,7 @@ div.radio-group {
 	padding-top: 1rem;
 }
 
-.scatterplot {
+.scatterplot,.barchart{
 	/*margin-top: 5px;*/
 	display: none;
 	background-color: #EEE;

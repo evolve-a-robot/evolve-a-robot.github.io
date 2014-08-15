@@ -61,13 +61,13 @@ function evo_interface() {
 
 	    // Initialize the plotting div.
 	    D3_Plotter.generationalScatterplot();
-	    D3_Plotter.populationScatterplot();
+	    D3_Barchart.populationBarchart(this.GA.param_pop_size);
 	    D3_FitnessTable.table(this.RobotGenome.genomeDescr());
 	}
 
 	// Adjust the population size.
 	this.changePopulationSize = function(pop_size) {
-		this.GA.param_pop_size = pop_size;
+		this.GA.updatePopSize(pop_size);
 	}
 
 	// Adjust the crossover percentage.

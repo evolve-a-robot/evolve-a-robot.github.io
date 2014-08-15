@@ -13,7 +13,7 @@ var D3_Plotter = D3_Plotter || new function() {
 
     // Create the scatterplot object which tracks population fitness.
     this.scatterplot = function(xAxisLabel, yAxisLabel, legend, scatterplot_div, point_colors) {
-      var popchart = $("#pop-scatterplot-div"),
+      var popchart = $(scatterplot_div),
           p = 30,
           w = popchart.parent().width() - p,
           h = $("#scatter-row").height() - p;
@@ -126,7 +126,6 @@ var D3_Plotter = D3_Plotter || new function() {
           fitness_data.push(new_data[i]);
         }
       }
-      console.log(fitness_data);
 
       //Update scale domains
       xScale.domain([0, d3.max(fitness_data, function(d) { return Math.ceil((d[0]+1)/10)*10; })]);
@@ -190,7 +189,6 @@ var D3_Plotter = D3_Plotter || new function() {
   }
 
   var gen_scatterplot = new Generic_Scatterplot();
-  var pop_scatterplot = new Generic_Scatterplot();
 
   // Create the scatterplot object which tracks generational fitness.
   this.generationalScatterplot = function() {
@@ -203,18 +201,5 @@ var D3_Plotter = D3_Plotter || new function() {
   // [[gen,max_fitness,0],[gen,avg_fitness,1]
   this.updateGenerationalScatterplot = function(new_data) {
       gen_scatterplot.updateScatterplot(new_data);
-  }
-
-  // Create the scatterplot that tracks population fitness during a generation.
-  this.populationScatterplot = function() {
-      pop_scatterplot.scatterplot("Population","Fitness",false,"#pop-scatterplot-div",[d3.rgb(0,0,255)]);
-  }
-
-  // Update function to add new data to the generational scatterplot.
-  //
-  // Input data is assumed to have the following format:
-  // [[gen,max_fitness,0],[gen,avg_fitness,1]
-  this.updatePopulationScatterplot = function(new_data) {
-      pop_scatterplot.updateScatterplot(new_data);
   }
 };

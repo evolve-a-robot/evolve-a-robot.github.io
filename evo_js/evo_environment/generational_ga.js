@@ -29,6 +29,7 @@ function generational_ga() {
 	var generation = 0;
 	var population = [];
 	var fitnesses = [];
+	var new_pop_size = -1;
 
 	var Robot;
 	var RobotGenome;
@@ -70,6 +71,11 @@ function generational_ga() {
 		Simulator.launchSimulation(cur_genome);
 	};
 
+	// Update the population size.
+	this.updatePopSize = function(upd_pop_size) {
+		new_pop_size = upd_pop_size;
+	};
+
 	// Return the current genome (recovering from validation).
 	this.getGenome = function() {
 		return cur_genome;
@@ -95,6 +101,15 @@ function generational_ga() {
 		return best_fitness;
 	};
 
+	// Update the current fitness for plotting purposes.
+	this.updateCurrentFitness = function(x,y,z) {
+		var new_fitness = fit_func(x,y,z);
+
+		// Update the population scatterplot.
+	    DataInterface.updatePopulationBarchart(cur_iteration,new_fitness,cur_fitness);
+	    cur_fitness = new_fitness;
+	}
+
 	// Generate a new candidate individual.
 	this.newRobot = function (x,y,z) {
 		cur_fitness = fit_func(x,y,z);
@@ -115,7 +130,8 @@ function generational_ga() {
 			var new_population = [];
 
 			// Create the new population.
-			for(var i=0; i < this.param_pop_size; ++i) {
+			new_pop_size = (new_pop_size != this.param_pop_size && new_pop_size > 0) ? new_pop_size : this.param_pop_size;
+			for(var i=0; i < new_pop_size; ++i) {
 				var new_ind;
 
 				// Perform Crossover
@@ -136,12 +152,22 @@ function generational_ga() {
 			// Update the plots with the fitnesses.
 			DataInterface.updateGenerationalScatterplot(parseInt(document.getElementById("individual-generation").innerHTML), fitnesses);
 
+			// Clear the population barchart.
+			DataInterface.clearPopulationBarchart();
+
+			// Synchronize the population size.
+			DataInterface.updatePopSize(new_pop_size);
+
 			// Send the best individual to the table.
 			DataInterface.updateFitnessTable(parseInt(document.getElementById("individual-generation").innerHTML),max_fitness,best_genomes[best_genomes.length-1]);
 
 			population = new_population;
 			fitnesses = [];
 			cur_iteration = 0;
+
+			// Update local pop size variables.
+			this.param_pop_size = new_pop_size;
+			new_pop_size = -1;
 
 			// Update the generation.
 			document.getElementById("individual-generation").innerHTML = parseInt(document.getElementById("individual-generation").innerHTML) + 1;
@@ -150,8 +176,13 @@ function generational_ga() {
 		// Update the individual counter.
 	    DataInterface.iterationUpdate(cur_iteration);
 
-	    // Update the population scatterplot.
-	    DataInterface.updatePopulationScatterplot(cur_iteration, fitnesses.length >= 1 ? fitnesses[fitnesses.length-1] : false);
+	    // Update the current fitness.
+	    cur_fitness = null;
+
+	    // // Update the population scatterplot.
+	    // DataInterface.updatePopulationBarchart(
+	    // 	cur_iteration, fitnesses.length >= 1 ? fitnesses[fitnesses.length-1] : false
+	    // );
 
 		// if (best_fitness === "") {
 		// 	add_best_individual();

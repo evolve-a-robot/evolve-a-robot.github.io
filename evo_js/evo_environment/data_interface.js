@@ -20,8 +20,18 @@ var DataInterface = DataInterface || new function() {
 			]);
 	}
 
-	this.updatePopulationScatterplot = function(individual, fitness) {
-		D3_Plotter.updatePopulationScatterplot(fitness ? [[individual,fitness,0]] : false);
+	this.updatePopulationBarchart = function(cur_iteration,new_fitness,old_fitness) {
+		D3_Barchart.updatePopulationBarchart(
+			new_fitness ? [[cur_iteration,new_fitness,0]] : false, old_fitness ? [[cur_iteration,old_fitness,0]] : null
+			);
+	}
+
+	this.clearPopulationBarchart = function() {
+		D3_Barchart.clearPopulationBarchart();
+	}
+
+	this.updatePopSize = function(new_pop_size) {
+		D3_Barchart.updatePopSize(new_pop_size);
 	}
 
 	this.iterationUpdate = function(iteration) {
