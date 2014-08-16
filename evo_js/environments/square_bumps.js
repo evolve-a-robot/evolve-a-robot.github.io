@@ -12,8 +12,8 @@ Math.radians = function(deg)
 
 function prism_environment() {
 
-	var rows 		= 40;
-	var row_width   = 320;
+	var rows 		= 80;
+	var row_width   = 500;
 	var spacing 	=  4; 
 
 	var start_offset = 30;

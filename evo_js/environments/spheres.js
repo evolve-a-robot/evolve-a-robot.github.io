@@ -12,8 +12,8 @@ Math.radians = function(deg)
 
 function sphere_environment() {
 
-	var sphere_rows 		= 40;
-	var sphere_row_number 	= 30;
+	var sphere_rows 		= 80;
+	var sphere_row_number 	= 80;
 	var spacing 			= 4; 
 
 	var start_offset = 40;
