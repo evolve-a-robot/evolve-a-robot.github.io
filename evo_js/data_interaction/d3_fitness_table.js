@@ -13,9 +13,6 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
 
         // Generate the headers.
         var headers = [];
-        // headers.push({label:"Generation",fixed_width:true,col_span:1});
-        // headers.push({label:"Fitness",fixed_width:true,col_span:1});
-        // headers.push({label:"Genome",fixed_width:false,col_span:genome_description.length});
         headers.push({label:"Gen",fixed_width:true,col_span:1});
         headers.push({label:"Fit",fixed_width:true,col_span:1});
         headers.push({label:"Genome",fixed_width:false,col_span:genome_description.length});
@@ -24,17 +21,11 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
         var table_width = document.getElementById('fitness_table').offsetWidth,
             header_width = 60,
             genome_width = table_width - 2 * header_width;
-            // = (document.getElementById('fitness_table').offsetWidth - 200);
-        // console.log(document.getElementById('container').offsetWidth, gene_width, Math.floor(gene_width).toString()+"px");
 
         table = d3.select("#fitness_table").append("table")
                                                .attr("id", "fitness_log_table");
-                                               //.style("visibility","hidden"),
         thead = table.append("thead"),
         tbody = table.append("tbody");
-
-        // table.style("border-collapse", "collapse")
-            // .style("border", "2px black solid")
 
         // append the header row
         thead.append("tr")
@@ -106,7 +97,9 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
 
         // create a cell in each row for each column
         var cells = rows.selectAll("td")
-            .data(function(d){return d;})
+            .data(function(d){
+                return d;
+            })
             .enter()
             .append("td")
                 .attr("class","best_ind")
@@ -114,7 +107,13 @@ var D3_FitnessTable = D3_FitnessTable || new function() {
                 .style("padding", "1px")
                 .style("background-color", function(d){return d.color;})
                 .attr("title", function(d){return d.visible ? "" : d.gene_descr+": "+d.val;})
-                .text(function(d){return d.visible ? d.val.toFixed(2) : "";}); 
+                .text(function(d,i){
+                    if (i == 0) {
+                        return parseInt(d.val);
+                    } else {
+                        return d.visible ? d.val.toFixed(2) : "";
+                    }
+                }); 
 
         table.style("visibility","visible");
     }
